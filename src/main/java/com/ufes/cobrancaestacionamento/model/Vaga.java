@@ -23,7 +23,11 @@ public class Vaga {
         this.cliente = cliente;
         this.veiculo = veiculo;
     }
-
+    
+    public boolean isClientePreferencial() {
+        return "preferencial".equalsIgnoreCase(cliente.getTipo());
+    }
+    
     public int getHorasEstacionadas() {
         return horasEstacionadas;
     }

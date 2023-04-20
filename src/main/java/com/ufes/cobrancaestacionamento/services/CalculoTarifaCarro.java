@@ -22,7 +22,7 @@ public class CalculoTarifaCarro implements ICalculoTarifa  {
         } else if (vaga.getHorasEstacionadas() < 24) {
             tarifaTotal = 40.0;
         }
-        if (vaga.getCliente().getTipo().equalsIgnoreCase("preferencial")) {
+        if (vaga.isClientePreferencial()) {
             tarifaTotal = tarifaTotal * 0.7;
         }
         return tarifaTotal;
