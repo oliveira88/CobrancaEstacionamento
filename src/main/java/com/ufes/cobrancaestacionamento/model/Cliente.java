@@ -19,4 +19,9 @@ public class Cliente {
     public String getTipo() {
         return tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + tipo + "}";
+    }
 }

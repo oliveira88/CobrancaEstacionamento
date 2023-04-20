@@ -19,4 +19,10 @@ public class Veiculo {
     public String getTipo() {
         return tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Veiculo{" + tipo + "}";
+    }
+    
 }

@@ -4,22 +4,31 @@
  */
 package com.ufes.cobrancaestacionamento.services;
 
-import com.ufes.cobrancaestacionamento.ICalculoTarifa;
 import com.ufes.cobrancaestacionamento.model.Vaga;
+import java.util.ArrayList;
 
 /**
  *
  * @author guiro
  */
 public class CalculadoraTarifaService {
-    private final ICalculoTarifa calculoTarifa;
 
-    public CalculadoraTarifaService(ICalculoTarifa calculoTarifa) {
-        this.calculoTarifa = calculoTarifa;
+    private final ArrayList<ICalculoTarifa> calculoTarifas;
+
+    public CalculadoraTarifaService() {
+        this.calculoTarifas = new ArrayList();
+        this.calculoTarifas.add(new CalculoTarifaCarro());
+        this.calculoTarifas.add(new CalculoTarifaMoto());
     }
-    
+
     public void processar(Vaga vaga) {
-        double resultado = calculoTarifa.calcular(vaga);
-        System.out.println("A tarifa total é de: "+ resultado);
+        double resultado = 0.0;
+        for (ICalculoTarifa metodo : this.calculoTarifas) {
+            if (metodo.seAplica(vaga.getVeiculo())) {
+                resultado = metodo.calcular(vaga);
+                break;
+            }
+        }
+        System.out.printf("A tarifa total do %s com %s é de %.1f\n", vaga.getVeiculo(), vaga.getCliente(), resultado);
     }
 }
